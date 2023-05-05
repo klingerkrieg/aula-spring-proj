@@ -1,53 +1,30 @@
-package com.example.demo.person;
+package com.example.demo.phone;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.FieldError;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.validation.Valid;
 
 @RestController
-public class PersonController {
+public class PhoneController {
 
     @Autowired
-    private PersonService personService;
+    private PhoneService phoneService;
 
-    @PostMapping("people/{personId}/addPhone/{phoneId}")
-    public Person addPhone(@PathVariable("personId") Long personId
-                            ,@PathVariable("phoneId") Long phoneId) {
-
-
-            return personService.addPhone(personId, phoneId);
-
-            /*ObjectMapper obj = new ObjectMapper();
-            String jsonStr = "{}";
-            try {
-                jsonStr = obj.writeValueAsString(person);
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
-            return jsonStr;*/
-    }
-
-
-    @PostMapping("/people/")
+    @PostMapping("/phones/")
     @ResponseStatus(HttpStatus.CREATED)
-    public Person save(@Valid @RequestBody Person person) {
-        return personService.save(person);
+    public Phone save(@Valid @RequestBody Phone phone) {
+        return phoneService.save(phone);
     }    
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -61,7 +38,4 @@ public class PersonController {
         });
         return errors;
     }
-
-
 }
-

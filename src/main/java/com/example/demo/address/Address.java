@@ -1,6 +1,7 @@
 package com.example.demo.address;
 
 import com.example.demo.person.Person;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,6 +15,7 @@ public class Address {
     private Long id;
 
     @OneToOne(mappedBy = "address")
+    @JsonIgnore
     private Person person;
 
     private String street;

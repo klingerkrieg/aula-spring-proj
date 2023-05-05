@@ -2,9 +2,13 @@ package com.example.demo.person;
 
 import java.util.List;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.br.CPF;
+
 import com.example.demo.address.Address;
 import com.example.demo.phone.Phone;
 import com.example.demo.projects.Project;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -15,7 +19,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Person {
@@ -24,8 +30,19 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @NotBlank(message = "firstName é obrigatório")
+    @Length(min = 3, max = 100, message = "O nome deverá ter no mínimo {min} e no máximo {max} caracteres")
     private String firstName;
+    
+    @NotBlank(message = "lastName é obrigatório")
     private String lastName;
+
+    @NotNull
+    @Email
+    private String email;
+
+    @CPF
+    private String cpf;
 
     @OneToMany(mappedBy = "person")
     private List<Phone> phones;
@@ -79,6 +96,30 @@ public class Person {
 
     public void setPhones(List<Phone> phones) {
         this.phones = phones;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
   
 }

@@ -23,5 +23,11 @@ public class PersonServiceImpl implements PersonService {
         phoneRepository.save(phone);
         return person;
     }
+
+    @Override
+    public Person save(Person person) {
+        return personRepository.save(person);
+    }
+
 }
 

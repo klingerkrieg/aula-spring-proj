@@ -1,6 +1,7 @@
 package com.example.demo.phone;
 
 import com.example.demo.person.Person;
+import com.example.demo.validations.PhoneNumber;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,6 +21,7 @@ public class Phone {
     @JsonIgnore
     private Person person;
 
+    @PhoneNumber
     private String phoneNumber;
 
 
