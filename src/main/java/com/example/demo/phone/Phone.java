@@ -18,7 +18,7 @@ public class Phone {
 
     @ManyToOne
     @JoinColumn(name="person_id")
-    @JsonIgnore
+    /*@JsonIgnore*/
     private Person person;
 
     @PhoneNumber
